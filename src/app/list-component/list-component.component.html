@@ -1,3 +1,7 @@
-<p>
-  list-component works!
-</p>
+<ul *ngFor="let item of listOfTable;let i = index">
+  <li>
+    {{ item }}
+    <button (click)="onDelete(item, i)">อย่ากด</button>
+    <button (click)="onEdit(item, i)">กดได้</button>
+  </li>
+</ul>

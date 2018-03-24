@@ -1,2 +1,11 @@
-<app-input-component></app-input-component>
-<app-list-component></app-list-component>
+<app-input-component
+  (onAdded)="onShow($event)"
+  (onUpdated)="onUpdated($event)"
+  [input]="input"
+  [isEdit]="isEdit">
+</app-input-component>
+
+<app-list-component
+  [listOfTable]="list"
+  (onEdited)="onClickEdited($event)">
+</app-list-component>

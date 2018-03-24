@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-list-component',
@@ -6,10 +6,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./list-component.component.css']
 })
 export class ListComponentComponent implements OnInit {
+  @Input() listOfTable = [];
+  // tslint:disable-next-line:no-output-on-prefix
+  @Output() onEdited = new EventEmitter<any>();
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  onDelete(item, index) {
+    this.listOfTable.splice(index, 1);
   }
 
+  onEdit(item, index) {
+    const data = { item, index };
+    this.onEdited.emit(data);
+  }
 }

@@ -6,6 +6,8 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { InputComponentComponent } from './input-component/input-component.component';
 import { ListComponentComponent } from './list-component/list-component.component';
+import { CallServiceService } from './call-service.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -16,9 +18,10 @@ import { ListComponentComponent } from './list-component/list-component.componen
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [CallServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
