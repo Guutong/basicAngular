@@ -1,7 +1,9 @@
-<ul *ngFor="let item of listOfTable;let i = index">
-  <li>
+<div class="card" style="margin: 5px;" *ngFor="let item of listOfTable;let i = index">
+  <div class="card-body">
     {{ item.id }} : {{ item.name }}
-    <button (click)="onDelete(item)">ลบ</button>
-    <button (click)="onEdit(item)">แก้ไข</button>
-  </li>
-</ul>
+  </div>
+  <div class="card-footer">
+    <button class="btn btn-danger" (click)="onDelete(item)">ลบ</button>
+    <button class="btn btn-success" (click)="onEdit(item)">แก้ไข</button>
+  </div>
+</div>

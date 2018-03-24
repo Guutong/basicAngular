@@ -1,7 +1,17 @@
 <div class="container">
-  <app-input-component (onAdded)="onShow($event)" (onUpdated)="onUpdated($event)" [input]="input" [isEdit]="isEdit">
-  </app-input-component>
-
-  <app-list-component [listOfTable]="list" (onEdited)="onClickEdit($event)" (onDeleted)="onClickDelete($event)">
-  </app-list-component>
+  <div class="row">
+    <div class="col-6">
+      <app-input-component
+        (onAdded)="onShow($event)"
+        (onUpdated)="onUpdated($event)"
+        [input]="input"
+        [isEdit]="isEdit">
+      </app-input-component>
+      <app-list-component
+        (onEdited)="onClickEdit($event)"
+        (onDeleted)="onClickDelete($event)"
+        [listOfTable]="list">
+      </app-list-component>
+    </div>
+  </div>
 </div>
