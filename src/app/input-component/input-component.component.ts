@@ -1,4 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { CallServiceService } from '../call-service.service';
+import { Employee } from '../employee';
 
 @Component({
   selector: 'app-input-component',
@@ -6,33 +8,32 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
   styleUrls: ['./input-component.component.css']
 })
 export class InputComponentComponent implements OnInit {
-
   header = 'BasicAngular';
-  @Input() input: string;
-  // @Input() index: string;
+  @Input() input: Employee = new Employee();
   @Input() isEdit = false;
-
-
   // tslint:disable-next-line:no-output-on-prefix
   @Output() onAdded = new EventEmitter<any>();
-
   // tslint:disable-next-line:no-output-on-prefix
   @Output() onUpdated = new EventEmitter<any>();
 
-  constructor() {}
+  constructor(private callServiceService: CallServiceService) {}
   ngOnInit() {}
 
   onAdd() {
-    if (this.input && this.input.length > 0) {
-      this.onAdded.emit(this.input);
-      this.input = undefined;
-      this.isEdit = false;
+    if (this.input.name && this.input.name.length > 0) {
+      this.callServiceService.addData(this.input).subscribe(res => {
+        this.onAdded.emit(res);
+        this.input = new Employee();
+        this.isEdit = false;
+      });
     }
   }
 
   onUpdate() {
-    this.onUpdated.emit({ text: this.input });
-    this.input = undefined;
-    this.isEdit = true;
+    this.callServiceService.updateData(this.input).subscribe(res => {
+      this.onUpdated.emit(res);
+      this.input = new Employee();
+      this.isEdit = true;
+    });
   }
 }

@@ -7,29 +7,52 @@ import { tap, catchError } from 'rxjs/operators';
 
 @Injectable()
 export class CallServiceService {
-
-  mockData: Employee[] = [
-    {
-      id: 1,
-      name: 'Ant'
-    },
-    {
-      id: 2,
-      name: 'Bat'
-    },
-    {
-      id: 3,
-      name: 'Cat'
-    }
-  ];
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getData(): Observable<Employee[]> {
-    return this.http.get<Employee[]>('http://592d1b27e06a4a00113ceade.mockapi.io/guutong/list').pipe(
-      tap(res => console.log('tap log: ', res)),
-      catchError(err => of(this.mockData))
-    );
+    return this.http
+      .get<Employee[]>(
+        'http://592d1b27e06a4a00113ceade.mockapi.io/guutong/employee'
+      )
+      .pipe(
+        tap(res => console.log('tap log: ', res)),
+        catchError(err => of([]))
+      );
   }
 
+  addData(item): Observable<Employee> {
+    return this.http
+      .post<Employee>(
+        'http://592d1b27e06a4a00113ceade.mockapi.io/guutong/employee',
+        item
+      )
+      .pipe(
+        tap(res => console.log('tap log: ', res)),
+        catchError(err => of(err))
+      );
+  }
+
+  updateData(item): Observable<Employee> {
+    console.log(item);
+    return this.http
+      .put<Employee>(
+        `http://592d1b27e06a4a00113ceade.mockapi.io/guutong/employee/${item.id}`,
+        item
+      )
+      .pipe(
+        tap(res => console.log('tap log: ', res)),
+        catchError(err => of(err))
+      );
+  }
+
+  deleteData(item): Observable<Employee[]> {
+    return this.http
+      .delete<Employee>(
+        `http://592d1b27e06a4a00113ceade.mockapi.io/guutong/employee/${item.id}`
+      )
+      .pipe(
+        tap(res => console.log('tap log: ', res)),
+        catchError(err => of(err))
+      );
+  }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CallServiceService } from './call-service.service';
+import { Employee } from './employee';
 
 @Component({
   selector: 'app-root',
@@ -7,34 +8,40 @@ import { CallServiceService } from './call-service.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  list = [1, 2, 3];
-  input;
+  list: Employee[];
+  input = new Employee();
   index;
   isEdit = false;
 
-  constructor(private callServiceService: CallServiceService) { }
+  constructor(private callServiceService: CallServiceService) {}
 
   ngOnInit(): void {
-    this.callServiceService.getData().subscribe(
-      (data) => {
-        console.log(data);
-      }
-    );
+    this.callServiceService.getData().subscribe(data => {
+      this.list = data;
+    });
   }
 
   onShow(event) {
-    this.list.push(event);
+    this.callServiceService.getData().subscribe(data => (this.list = data));
   }
 
-  onClickEdited(event) {
-    this.input = event.item;
-    this.index = event.index;
+  onClickEdit(event) {
+    const { id, name } = event;
+    this.input = { id, name };
     this.isEdit = true;
   }
 
+  onClickDelete(event) {
+    this.callServiceService.deleteData(event).subscribe(res => {
+      this.callServiceService.getData().subscribe(data => (this.list = data));
+    });
+  }
+
   onUpdated(event) {
-    this.list.splice(this.index, 1, event.text);
-    this.input = '';
-    this.isEdit = false;
+    this.callServiceService.getData().subscribe(data => {
+      this.list = data;
+      this.input = new Employee();
+      this.isEdit = false;
+    });
   }
 }

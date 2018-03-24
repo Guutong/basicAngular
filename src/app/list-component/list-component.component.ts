@@ -9,17 +9,18 @@ export class ListComponentComponent implements OnInit {
   @Input() listOfTable = [];
   // tslint:disable-next-line:no-output-on-prefix
   @Output() onEdited = new EventEmitter<any>();
+  // tslint:disable-next-line:no-output-on-prefix
+  @Output() onDeleted = new EventEmitter<any>();
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 
-  onDelete(item, index) {
-    this.listOfTable.splice(index, 1);
+  onDelete(item) {
+    this.onDeleted.emit(item);
   }
 
-  onEdit(item, index) {
-    const data = { item, index };
-    this.onEdited.emit(data);
+  onEdit(item) {
+    this.onEdited.emit(item);
   }
 }

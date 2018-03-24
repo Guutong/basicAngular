@@ -1,6 +1,6 @@
 <h2>
   {{ header }}
 </h2>
-<input type="text" [(ngModel)]="input">
-<button *ngIf="!isEdit" (click)="onAdd()"> แอดดิ </button>
-<button *ngIf="isEdit" (click)="onUpdate()"> อัพเดทดิ </button>
+<input type="text" [(ngModel)]="input.name">
+<button *ngIf="!isEdit" (click)="onAdd()"> เพิ่ม </button>
+<button *ngIf="isEdit" (click)="onUpdate()"> แก้ไข </button>

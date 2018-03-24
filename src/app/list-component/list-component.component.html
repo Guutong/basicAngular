@@ -1,7 +1,7 @@
 <ul *ngFor="let item of listOfTable;let i = index">
   <li>
-    {{ item }}
-    <button (click)="onDelete(item, i)">อย่ากด</button>
-    <button (click)="onEdit(item, i)">กดได้</button>
+    {{ item.id }} : {{ item.name }}
+    <button (click)="onDelete(item)">ลบ</button>
+    <button (click)="onEdit(item)">แก้ไข</button>
   </li>
 </ul>
