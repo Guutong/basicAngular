@@ -12,7 +12,7 @@ export class CallServiceService {
   getData(): Observable<Employee[]> {
     return this.http
       .get<Employee[]>(
-        'http://592d1b27e06a4a00113ceade.mockapi.io/guutong/employee'
+        'https://592d1b27e06a4a00113ceade.mockapi.io/guutong/employee'
       )
       .pipe(
         tap(res => console.log('tap log: ', res)),
@@ -23,7 +23,7 @@ export class CallServiceService {
   addData(item): Observable<Employee> {
     return this.http
       .post<Employee>(
-        'http://592d1b27e06a4a00113ceade.mockapi.io/guutong/employee',
+        'https://592d1b27e06a4a00113ceade.mockapi.io/guutong/employee',
         item
       )
       .pipe(
@@ -36,7 +36,7 @@ export class CallServiceService {
     console.log(item);
     return this.http
       .put<Employee>(
-        `http://592d1b27e06a4a00113ceade.mockapi.io/guutong/employee/${item.id}`,
+        `https://592d1b27e06a4a00113ceade.mockapi.io/guutong/employee/${item.id}`,
         item
       )
       .pipe(
@@ -48,7 +48,7 @@ export class CallServiceService {
   deleteData(item): Observable<Employee[]> {
     return this.http
       .delete<Employee>(
-        `http://592d1b27e06a4a00113ceade.mockapi.io/guutong/employee/${item.id}`
+        `https://592d1b27e06a4a00113ceade.mockapi.io/guutong/employee/${item.id}`
       )
       .pipe(
         tap(res => console.log('tap log: ', res)),
